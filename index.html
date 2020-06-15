@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        
+        main{
+            width:70%;
+            height:600px;
+            margin:100 auto;
+            background-color:black;
+        }
+        #grid{
+            display:grid;
+            width:600px;
+            height:600px;
+            margin:0 auto;
+            grid-template-columns:repeat(auto-fill,75px);  /* width / n of columns */
+            grid-template-rows:repeat(auto-fill,75px);  /* height / n of rows */
+            background-color:red;
+        }
+
+        .cell{
+            border: solid black 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="left-side">
+
+        </div>
+        <div id="grid">
+
+        </div>
+        <div id="right-side">
+
+        </div>
+    </main>
+
+    <script>
+        let grid = document.querySelector("#grid");
+
+        // declare board size. e.g. 8 x 8, 16 x 16 etc.
+        let size = 16;
+
+        // get grid's width to calculate correct cell size
+        let width = grid.offsetWidth;
+
+        // calculate new cell size based on number of cells
+
+        grid.setAttribute("style", `grid-template-columns:repeat(auto-fill,${width/size}px); grid-template-rows:repeat(auto-fill,${width/size}px);`);
+        
+
+        for (let i = 0; i < size*size; i++){
+            const div = document.createElement("div");
+            div.classList.add("cell");
+            grid.appendChild(div);
+        }
+
+    </script>
+</body>
+
+</html>
