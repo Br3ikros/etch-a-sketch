@@ -65,6 +65,7 @@
             border: solid 0;
             width:4em;
             height:2em;
+            cursor:pointer;
             
         }
 
@@ -75,6 +76,10 @@
         .color{
             width:2em;
             border:white solid 1px;
+        }
+
+        .active{
+            opacity:1;
         }
 
         #black{
@@ -95,7 +100,7 @@
         <div id="left-side">
             <div id="colors">
                 <ul>
-                    <li><button id="black" class="color"></button></li>
+                    <li><button id="black" class="color active"></button></li>
                     <li><button id="white" class="color"></button></li>
                     <li><button id="rainbow" class="color"></button></li>
                 </ul>
@@ -104,17 +109,17 @@
             <div id="sizes">
                 <ul>
                     <li> <button>8x8</button></li>
-                    <li> <button>16x16</button></li>
+                    <li> <button class="active">16x16</button></li>
                     <li> <button>32x32</button></li>
                     <li> <button>64x64</button></li>
                 </ul>
             </div>
 
-            <div><button style="width:7em;">Mode: drag</button></div>
+            <div><button style="width:7em;" class="active">Mode: drag</button></div>
 
-            <div><button>Reset</button></div>
+            <div><button class="active">Reset</button></div>
 
-            <div><button>Save</button></div>
+            <div><button class="active">Save</button></div>
 
 
         </div>
