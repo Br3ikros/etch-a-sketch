@@ -14,7 +14,7 @@
             width:70%;
             height:600px;
             margin:100 auto;
-            background-color:black;
+            background-color:red;
         }
         #grid{
             display:grid;
@@ -23,18 +23,91 @@
             margin:0 auto;
             grid-template-columns:repeat(auto-fill,75px);  /* width / n of columns */
             grid-template-rows:repeat(auto-fill,75px);  /* height / n of rows */
-            background-color:red;
+            background-color:white;
         }
 
         .cell{
             border: solid black 1px;
         }
+
+        #left-side{
+            float:left;
+            background-color:black;
+            border-radius: 2em;
+        }
+
+        #left-side div{
+            margin:70px 20px 70px 20px;
+            
+        }
+
+        ul{
+            display:flex;
+            list-style: none;
+        }
+
+        li{
+            margin-right:10px;
+        }
+
+        button{
+            opacity:0.5;
+            border-radius:2em;
+            background-color:gray;
+            border: solid 0;
+            width:4em;
+            height:2em;
+            
+        }
+
+        button:hover{
+            opacity:1;
+        }
+
+        .color{
+            width:2em;
+            border:white solid 1px;
+        }
+
+        #black{
+            background-color:black;
+        }
+        #white{
+            background-color: white;
+        }
+        #rainbow{
+            background-color:gray;
+        }
+
     </style>
 </head>
 
 <body>
     <main>
         <div id="left-side">
+            <div id="colors">
+                <ul>
+                    <li><button id="black" class="color"></button></li>
+                    <li><button id="white" class="color"></button></li>
+                    <li><button id="rainbow" class="color"></button></li>
+                </ul>
+            </div>
+
+            <div id="sizes">
+                <ul>
+                    <li> <button>8x8</button></li>
+                    <li> <button>16x16</button></li>
+                    <li> <button>32x32</button></li>
+                    <li> <button>64x64</button></li>
+                </ul>
+            </div>
+
+            <div><button>Click and drag</button></div>
+
+            <div><button>Reset</button></div>
+
+            <div><button>Save</button></div>
+
 
         </div>
         <div id="grid">
