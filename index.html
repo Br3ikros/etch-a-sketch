@@ -9,12 +9,13 @@
             margin:0;
             padding:0;
         }
-        
+
+      
         main{
             width:70%;
             height:600px;
             margin:100 auto;
-            background-color:red;
+            display:flex;
         }
         #grid{
             display:grid;
@@ -24,16 +25,18 @@
             grid-template-columns:repeat(auto-fill,75px);  /* width / n of columns */
             grid-template-rows:repeat(auto-fill,75px);  /* height / n of rows */
             background-color:white;
+            box-shadow: 0 0 100px rgb(40,40,41);
         }
 
         .cell{
-            border: solid black 1px;
+            border: solid rgb(40,40,41) 1px;
         }
 
         #left-side{
-            float:left;
-            background-color:black;
+            margin:20px 0px 20px 20px;
+            background-color: rgb(40,40,41);
             border-radius: 2em;
+            box-shadow: 0 0 10px rgb(40,40,41);
         }
 
         #left-side div{
@@ -102,7 +105,7 @@
                 </ul>
             </div>
 
-            <div><button>Click and drag</button></div>
+            <div><button>Drag</button></div>
 
             <div><button>Reset</button></div>
 
@@ -110,9 +113,14 @@
 
 
         </div>
+        
+       
+
         <div id="grid">
 
         </div>
+        
+
         <div id="right-side">
 
         </div>
