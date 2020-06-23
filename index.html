@@ -35,6 +35,8 @@
             /* height / n of rows */
             background-color: rgb(238, 238, 238);
             box-shadow: 0 0 100px rgb(40, 40, 41);
+            border: solid rgb(40, 40, 41) 5px; 
+            border-radius:5px;
         }
 
         .cell {
@@ -152,7 +154,7 @@
             emptyGrid();
             
             // get grid's width to calculate correct cell size
-            let width = grid.offsetWidth;
+            let width = grid.clientWidth; //gets width excluding border 
 
             // calculate new cell size based on number of cells
 
