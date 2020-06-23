@@ -5,93 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
-            margin:0;
-            padding:0;
+        * {
+            margin: 0;
+            padding: 0;
         }
 
-        body{
-            background-image: url("doodle2.png"); /* 2.png 5.jpeg 14.jpg  */
+        body {
+            background-image: url("doodle2.png");
+            /* 2.png 5.jpeg 14.jpg  */
 
 
         }
-        
-        main{
-            width:70%;
-            height:600px;
-            margin:100 auto;
-            display:flex;
-        }
-        #grid{
-            display:grid;
-            width:600px;
-            height:600px;
-            margin:0 auto;
-            grid-template-columns:repeat(auto-fill,75px);  /* width / n of columns */
-            grid-template-rows:repeat(auto-fill,75px);  /* height / n of rows */
-            background-color:rgb(238, 238, 238);
-            box-shadow: 0 0 100px rgb(40,40,41);
+
+        main {
+            width: 70%;
+            height: 600px;
+            margin: 100 auto;
+            display: flex;
         }
 
-        .cell{
-            border: solid rgb(40,40,41) 1px;
+        #grid {
+            display: grid;
+            width: 600px;
+            height: 600px;
+            margin: 0 auto;
+            grid-template-columns: repeat(auto-fill, 75px);
+            /* width / n of columns */
+            grid-template-rows: repeat(auto-fill, 75px);
+            /* height / n of rows */
+            background-color: rgb(238, 238, 238);
+            box-shadow: 0 0 100px rgb(40, 40, 41);
         }
 
-        #left-side{
-            margin:20px 0px 20px 20px;
-            background-color: rgb(40,40,41);
+        .cell {
+            border: solid rgb(40, 40, 41) 1px;
+        }
+
+        #left-side {
+            margin: 20px 0px 20px 20px;
+            background-color: rgb(40, 40, 41);
             border-radius: 2em;
-            box-shadow: 0 0 10px rgb(40,40,41);
+            box-shadow: 0 0 10px rgb(40, 40, 41);
         }
 
-        #left-side div{
-            margin:70px 20px 70px 20px;
-            
+        #left-side div {
+            margin: 70px 20px 70px 20px;
+
         }
 
-        ul{
-            display:flex;
+        ul {
+            display: flex;
             list-style: none;
         }
 
-        li{
-            margin-right:10px;
+        li {
+            margin-right: 10px;
         }
 
-        button{
-            opacity:0.5;
-            border-radius:2em;
-            background-color:gray;
+        button {
+            opacity: 0.5;
+            border-radius: 2em;
+            background-color: gray;
             border: solid 0;
-            width:4em;
-            height:2em;
-            cursor:pointer;
-            
+            width: 4em;
+            height: 2em;
+            cursor: pointer;
+
         }
 
-        button:hover{
-            opacity:1;
+        button:hover {
+            opacity: 1;
+            scale: 1.1;
         }
 
-        .color{
-            width:2em;
-            border:white solid 1px;
+        .color {
+            width: 2em;
+            border: white solid 1px;
         }
 
-        .active{
-            opacity:1;
+        .active {
+            opacity: 1;
         }
 
-        #black{
-            background-color:black;
+        #black {
+            background-color: black;
         }
-        #white{
+
+        #white {
             background-color: white;
         }
-        #rainbow{
-            background-color:gray;
-        }
 
+        #rainbow {
+            background-color: gray;
+        }
     </style>
 </head>
 
@@ -108,10 +114,10 @@
 
             <div id="sizes">
                 <ul>
-                    <li> <button>8x8</button></li>
-                    <li> <button class="active">16x16</button></li>
-                    <li> <button>32x32</button></li>
-                    <li> <button>64x64</button></li>
+                    <li> <button value="8">8x8</button></li>
+                    <li> <button class="active" value="16">16x16</button></li>
+                    <li> <button value="32">32x32</button></li>
+                    <li> <button value="64">64x64</button></li>
                 </ul>
             </div>
 
@@ -123,13 +129,13 @@
 
 
         </div>
-        
-       
+
+
 
         <div id="grid">
 
         </div>
-        
+
 
         <div id="right-side">
 
@@ -137,27 +143,61 @@
     </main>
 
     <script>
+
         let grid = document.querySelector("#grid");
+        createGrid(16);
 
-        // declare board size. e.g. 8 x 8, 16 x 16 etc.
-        let size = 16;
+        function createGrid(size) {
 
-        // get grid's width to calculate correct cell size
-        let width = grid.offsetWidth;
+            emptyGrid();
+            
+            // get grid's width to calculate correct cell size
+            let width = grid.offsetWidth;
 
-        // calculate new cell size based on number of cells
+            // calculate new cell size based on number of cells
 
-        grid.setAttribute("style", `grid-template-columns:repeat(auto-fill,${width/size}px); grid-template-rows:repeat(auto-fill,${width/size}px);`);
-        
+            grid.setAttribute("style", `grid-template-columns:repeat(auto-fill,${width / size}px); grid-template-rows:repeat(auto-fill,${width / size}px);`);
 
-        for (let i = 0; i < size*size; i++){
-            const div = document.createElement("div");
-            div.classList.add("cell");
-            div.addEventListener("mouseover", (e)=> {
-                e.target.setAttribute("style","background-color:black;");
-            });
-            grid.appendChild(div);
+            for (let i = 0; i < size * size; i++) {
+                const div = document.createElement("div");
+                div.classList.add("cell");
+                div.addEventListener("mouseover", (e) => {
+                    e.target.setAttribute("style", "background-color:black;");
+                });
+                grid.appendChild(div);
+            }
+
         }
+
+        function emptyGrid() {
+            while (grid.firstChild) { grid.removeChild(grid.firstChild); }
+        }
+
+
+
+
+        let buttonDivs = ["colors", "sizes"];
+
+        buttonDivs.forEach(function (divName) {
+            let sizesDiv = document.querySelector(`#${divName}`);
+            let sizeButtons = sizesDiv.querySelectorAll("button");
+            sizeButtons.forEach(function (button) {
+                button.addEventListener("click", function (e) {
+                    sizeButtons.forEach(function (button) {
+                        button.classList.remove("active");
+                    });
+                    e.target.classList.add("active");
+                    if (divName == "colors") {
+
+                    } else {
+                        let size = e.target.value;
+                        createGrid(size);
+                    }
+                });
+            });
+        });
+
+
 
     </script>
 </body>
