@@ -18,9 +18,10 @@
         }
 
         main {
-            width: 70%;
+            width: 90%;
+            /* 70%*/
             height: 600px;
-            margin: 100 auto;
+            margin: 110 auto;
             display: flex;
         }
 
@@ -28,15 +29,15 @@
             display: grid;
             width: 600px;
             height: 600px;
-            margin: 0 auto;
+            margin: auto auto;
             grid-template-columns: repeat(auto-fill, 75px);
             /* width / n of columns */
             grid-template-rows: repeat(auto-fill, 75px);
             /* height / n of rows */
             background-color: rgb(238, 238, 238);
             box-shadow: 0 0 100px rgb(40, 40, 41);
-            border: solid rgb(40, 40, 41) 5px; 
-            border-radius:5px;
+            border: solid rgb(40, 40, 41) 5px;
+            border-radius: 5px;
         }
 
         .cell {
@@ -44,6 +45,8 @@
         }
 
         #left-side {
+            position: absolute;
+            /* removed */
             margin: 20px 0px 20px 20px;
             background-color: rgb(40, 40, 41);
             border-radius: 2em;
@@ -67,7 +70,7 @@
         button {
             opacity: 0.5;
             border-radius: 2em;
-            background-color: gray;
+            background-color: rgb(196, 196, 196);
             border: solid 0;
             width: 4em;
             height: 2em;
@@ -100,6 +103,10 @@
         #rainbow {
             background-color: gray;
         }
+
+        .rainbow{
+            transition: all 0.3s linear;
+        }
     </style>
 </head>
 
@@ -108,9 +115,9 @@
         <div id="left-side">
             <div id="colors">
                 <ul>
-                    <li><button id="black" class="color active"></button></li>
-                    <li><button id="white" class="color"></button></li>
-                    <li><button id="rainbow" class="color"></button></li>
+                    <li><button id="black" class="color active" value="black"></button></li>
+                    <li><button id="white" class="color" value="white"></button></li>
+                    <li><button id="rainbow" class="color" value="rainbow"></button></li>
                 </ul>
             </div>
 
@@ -147,12 +154,17 @@
     <script>
 
         let grid = document.querySelector("#grid");
-        createGrid(16);
+        let size = 16;
+        let color = "black";
 
-        function createGrid(size) {
+        createGrid();
+
+
+
+        function createGrid() {
 
             emptyGrid();
-            
+
             // get grid's width to calculate correct cell size
             let width = grid.clientWidth; //gets width excluding border 
 
@@ -164,7 +176,15 @@
                 const div = document.createElement("div");
                 div.classList.add("cell");
                 div.addEventListener("mouseover", (e) => {
-                    e.target.setAttribute("style", "background-color:black;");
+                    e.target.classList.remove("rainbow");
+                    if (color == "white") {
+                        e.target.setAttribute("style", `background-color:rgb(238, 238, 238);`);
+                    } else if (color == "black") {
+                        e.target.setAttribute("style", `background-color:rgb(0, 0, 0);`);
+                    } else {
+                        e.target.classList.add("rainbow");
+                        e.target.setAttribute("style", `background-color:rgb(${getRandomInt(50, 255)}, ${getRandomInt(50, 255)}, ${getRandomInt(50, 255)});`);
+                    }
                 });
                 grid.appendChild(div);
             }
@@ -172,10 +192,10 @@
         }
 
         function emptyGrid() {
-            while (grid.firstChild) { grid.removeChild(grid.firstChild); }
+            while (grid.firstChild) {
+                grid.removeChild(grid.firstChild);
+            }
         }
-
-
 
 
         let buttonDivs = ["colors", "sizes"];
@@ -190,14 +210,20 @@
                     });
                     e.target.classList.add("active");
                     if (divName == "colors") {
-
+                        color = e.target.value;
                     } else {
-                        let size = e.target.value;
-                        createGrid(size);
+                        size = e.target.value;
+                        createGrid();
                     }
                 });
             });
         });
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
 
 
 
