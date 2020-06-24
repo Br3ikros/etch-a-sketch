@@ -130,7 +130,7 @@
                 </ul>
             </div>
 
-            <div><button class="active" style="width:7em;" value="mode">Mode: drag</button></div>
+            <div><button class="active" style="width:7em;" value="mode">Mode: hover</button></div>
 
             <div><button class="active" value="reset">Reset</button></div>
 
@@ -156,6 +156,8 @@
         let grid = document.querySelector("#grid");
         let size = 16;
         let color = "black";
+        let mode = "hover";
+        let mouseDown = 0;
 
         createGrid();
 
@@ -172,8 +174,9 @@
             for (let i = 0; i < size * size; i++) {
                 const div = document.createElement("div");
                 div.classList.add("cell");
-                div.value = ""
+                div.value = ""; // value is used to record wether cursor has already been on a given cell
                 div.addEventListener("mouseover", (e) => {
+                    if (mode =="hover" || mode == "drag" && mouseDown == 1){
                     e.target.classList.remove("rainbow");
                     if (color == "white") {
                         e.target.setAttribute("style", `background-color:rgb(238, 238, 238);`);
@@ -203,6 +206,8 @@
                     } else {
                         e.target.classList.add("rainbow");
                         e.target.setAttribute("style", `background-color:rgb(${getRandomInt(50, 255)}, ${getRandomInt(50, 255)}, ${getRandomInt(50, 255)});`);
+                    }
+
                     }
                 });
                 grid.appendChild(div);
@@ -251,11 +256,29 @@
 
         // setting events for remaining buttons
 
-        let reset = document.querySelector('button[value = "reset"]');
-        reset.addEventListener("click", () => {
+        let resetButton = document.querySelector('button[value = "reset"]');
+        resetButton.addEventListener("click", () => {
             resetGrid();
         })
 
+        let modeButton = document.querySelector('button[value = "mode"]');
+        modeButton.addEventListener("click", function(e){
+            if (e.target.textContent == "Mode: hover"){
+                e.target.textContent = "Mode: drag";
+                mode = "drag";
+            } else {
+                e.target.textContent = "Mode: hover"
+                mode = "hover";
+            }
+        });
+        
+        grid.addEventListener("pointerdown", function(){
+            mouseDown = 1;
+        });
+
+        grid.addEventListener("pointerup", function(){
+            mouseDown = 0;
+        });
 
     </script>
 </body>
