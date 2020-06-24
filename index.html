@@ -101,7 +101,7 @@
         }
 
         #rainbow {
-            background-color: gray;
+            background: linear-gradient(to right, yellow, red, blue);
         }
 
         .rainbow{
@@ -163,8 +163,6 @@
 
         function createGrid() {
 
-            emptyGrid();
-            
             let width = grid.clientWidth; //gets grid's width excluding border 
 
             // calculate new cell size based on number of cells
@@ -218,6 +216,11 @@
             }
         }
 
+        function resetGrid(){
+            emptyGrid();
+            createGrid();
+        }
+
 
         let buttonDivs = ["colors", "sizes"];
 
@@ -234,7 +237,7 @@
                         color = e.target.value;
                     } else {
                         size = e.target.value;
-                        createGrid();
+                        resetGrid();
                     }
                 });
             });
@@ -248,6 +251,10 @@
 
         // setting events for remaining buttons
 
+        let reset = document.querySelector('button[value = "reset"]');
+        reset.addEventListener("click", () => {
+            resetGrid();
+        })
 
 
     </script>
