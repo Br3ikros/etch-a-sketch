@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Etch a Sketch</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         body {
@@ -17,11 +18,28 @@
 
         }
 
+        header{
+            width:50%;
+            height:70px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: rgb(40, 40, 41);
+            color:rgb(196, 196, 196);
+            border-bottom-left-radius: 4em;
+            border-bottom-right-radius: 4em;
+            box-shadow: 0 0 10px rgb(40, 40, 41);
+        }
+
+        h1{
+            letter-spacing: 4px;
+            padding:12px;
+        }
+
         main {
             width: 90%;
             /* 70%*/
             height: 600px;
-            margin: 110 auto;
+            margin: 70px auto;
             display: flex;
         }
 
@@ -36,12 +54,12 @@
             /* height / n of rows */
             background-color: rgb(238, 238, 238);
             box-shadow: 0 0 100px rgb(40, 40, 41);
-            border: solid rgb(40, 40, 41) 5px;
+            border: solid rgb(40, 40, 41) 10px;
             border-radius: 5px;
         }
 
         .cell {
-            border: solid rgb(40, 40, 41) 1px;
+            border: solid rgb(196, 196, 196) 1px;
         }
 
         #left-side {
@@ -115,6 +133,11 @@
 </head>
 
 <body>
+
+    <header>
+        <h1>Etch a Sketch 🎨</h1>
+    </header>
+
     <main>
         <div id="left-side">
             <div id="colors">
