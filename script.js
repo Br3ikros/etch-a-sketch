@@ -15,11 +15,7 @@ addGridEvents();
 
 function createGrid() {
 
-    let width = grid.clientWidth; //gets grid's width excluding border 
-
-    // calculate new cell size based on number of cells
-
-    grid.setAttribute("style", `grid-template-columns:repeat(auto-fill,${width / size}px); grid-template-rows:repeat(auto-fill,${width / size}px);`);
+    grid.style.setProperty("--n", size);
 
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement("div");

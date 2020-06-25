@@ -48,10 +48,7 @@
             width: 600px;
             height: 600px;
             margin: auto auto;
-            grid-template-columns: repeat(auto-fill, 75px);
-            /* width / n of columns */
-            grid-template-rows: repeat(auto-fill, 75px);
-            /* height / n of rows */
+            grid-template-columns: repeat(var(--n, 32), 1fr);
             background-color: rgb(238, 238, 238);
             box-shadow: 0 0 100px rgb(40, 40, 41);
             border: solid rgb(40, 40, 41) 10px;
