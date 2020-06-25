@@ -7,6 +7,10 @@ let mouseDown = 0;
 
 createGrid();
 
+addButtonEvents();
+
+addGridEvents();
+
 
 
 function createGrid() {
@@ -23,43 +27,47 @@ function createGrid() {
         div.style.backgroundColor = "rgb(238, 238, 238)";
         div.value = ""; // value is used to record wether cursor has already been on a given cell
         div.addEventListener("mouseover", (e) => {
-            if (mode == "hover" || mode == "drag" && mouseDown == 1) {
-                e.target.classList.remove("rainbow");
-                if (color == "white") {
-                    e.target.setAttribute("style", `background-color:rgb(238, 238, 238);`);
-                } else if (color == "black") {
-
-                    //this code words by giving a value of "visited" to each cell that has been touched by the cursor
-                    //then it extracts the background color of a cell and decreases it each time the cell is stepped on
-
-                    let intensity;
-
-                    intensity = window.getComputedStyle(e.target).getPropertyValue("background-color");
-
-                    //this line gets the R value of the RGB color, since for shades of black R, G and B values are the same
-                    intensity = intensity.replace(/[^\d,]/g, "").split(",")[0];
-
-                    if (e.target.value != "visited") {
-                        e.target.value = "visited";
-                        intensity = 210;
-                    } else if (intensity > 0) {
-                        intensity -= 30;
-                    } else {
-                        intensity = 0;
-                    }
-
-                    e.target.setAttribute("style", `background-color:rgb(${intensity}, ${intensity}, ${intensity});`);
-
-                } else {
-                    e.target.classList.add("rainbow");
-                    e.target.setAttribute("style", `background-color:rgb(${getRandomInt(50, 255)}, ${getRandomInt(50, 255)}, ${getRandomInt(50, 255)});`);
-                }
-
-            }
+            setColor(e);
         });
         grid.appendChild(div);
     }
 
+}
+
+function setColor(e){
+    if (mode == "hover" || mode == "drag" && mouseDown == 1) {
+        e.target.classList.remove("rainbow");
+        if (color == "white") {
+            e.target.setAttribute("style", `background-color:rgb(238, 238, 238);`);
+        } else if (color == "black") {
+
+            //this code words by giving a value of "visited" to each cell that has been touched by the cursor
+            //then it extracts the background color of a cell and decreases it each time the cell is stepped on
+
+            let intensity;
+
+            intensity = window.getComputedStyle(e.target).getPropertyValue("background-color");
+
+            //this line gets the R value of the RGB color, since for shades of black R, G and B values are the same
+            intensity = intensity.replace(/[^\d,]/g, "").split(",")[0];
+
+            if (e.target.value != "visited") {
+                e.target.value = "visited";
+                intensity = 210;
+            } else if (intensity > 0) {
+                intensity -= 30;
+            } else {
+                intensity = 0;
+            }
+
+            e.target.setAttribute("style", `background-color:rgb(${intensity}, ${intensity}, ${intensity});`);
+
+        } else {
+            e.target.classList.add("rainbow");
+            e.target.setAttribute("style", `background-color:rgb(${getRandomInt(50, 255)}, ${getRandomInt(50, 255)}, ${getRandomInt(50, 255)});`);
+        }
+
+    } 
 }
 
 function emptyGrid() {
@@ -73,8 +81,8 @@ function resetGrid() {
     createGrid();
 }
 
-
-let buttonDivs = ["colors", "sizes"];
+function addButtonEvents(){
+    let buttonDivs = ["colors", "sizes"];
 
 buttonDivs.forEach(function (divName) {
     let sizesDiv = document.querySelector(`#${divName}`);
@@ -95,12 +103,6 @@ buttonDivs.forEach(function (divName) {
     });
 });
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
-
 // setting events for remaining buttons
 
 let resetButton = document.querySelector('button[value = "reset"]');
@@ -119,6 +121,24 @@ modeButton.addEventListener("click", function (e) {
     }
 });
 
+
+let saveButton = document.querySelector("button[value ='save'");
+
+saveButton.addEventListener("click", function () {
+    saveSketch();
+});
+
+
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function addGridEvents(){
+
 grid.addEventListener("pointerdown", function () {
     mouseDown = 1;
 });
@@ -126,10 +146,9 @@ grid.addEventListener("pointerdown", function () {
 grid.addEventListener("pointerup", function () {
     mouseDown = 0;
 });
+}
 
-let saveButton = document.querySelector("button[value ='save'");
-
-saveButton.addEventListener("click", function () {
+function saveSketch(){
     var t = document.getElementById('canvas');
     var c = t.getContext('2d');
     const container = document.getElementsByClassName('cell');
@@ -148,4 +167,4 @@ saveButton.addEventListener("click", function () {
         }
     }
     window.open(document.getElementById('canvas').toDataURL());
-});
+}
